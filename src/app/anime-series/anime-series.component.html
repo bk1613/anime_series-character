@@ -1,0 +1,73 @@
+<h1>Test Anime Series</h1>
+
+<div>
+    <form>
+        <legend>Choose a series</legend>
+        <select id="Series">
+            <option *ngFor="let s of Animeseries" 
+            [value]="s.name"> {{ s.name }}</option>
+            <option value="default">Default</option>
+        </select> 
+    </form>       
+</div>
+
+<table class="seriesTable">
+    <thead>
+        <tr>
+            <th scope="col">Series Id</th>
+            <th scope="col">Series Name</th>
+            <th scope="col">Series Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of Animeseries">
+            <td>{{ s.id }}</td>
+            <td>{{ s.name }}</td>
+        </tr>
+    </tbody>
+</table>
+                
+<form>
+    <h3>Name the anime series</h3>
+    <div>
+        <label class="label col-sm-3">Series name:</label>
+        <input type="text" name="SeriesName" [(ngModel)]="Seriesname" class="form-control" placeholder="Series Name" required>
+        <button (click)="getSeries()" class="btn btn-secondary">Get Series</button>
+    </div>
+</form>
+
+
+<!--
+<table id = "seriesinfo">
+    <thead>
+        <tr>
+           <th scope = ></th> 
+        </tr>
+    </thead>
+-->
+
+<!-- </table>
+<div id = "seriesinfo">
+    
+   <tbody>
+        <tr >
+
+        </tr>
+    </tbody> 
+    <div>
+        <h1>Series Name</h1>
+        <p>Series Description</p>
+    </div>
+    <div>
+        <form id = charmenu>
+            <fieldset>
+                <legend>Chracter Bios</legend>
+                <select id = "chars">
+                    <option value = "character1">Character 1</option>
+                    <option value = "character2">Character 2</option>
+                    <option value = "character3">Character 3</option>
+                </select>
+            </fieldset>
+        </form>
+    </div>
+</div> -->

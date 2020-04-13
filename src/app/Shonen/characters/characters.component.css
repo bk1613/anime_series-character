@@ -1,0 +1,15 @@
+#bio {
+    border-style:solid;
+    border-width:3px;
+}
+#name{
+    font-size:40px;
+}
+#attribute{
+    font-size:30px;
+    margin-left:15px;
+}
+#rank{
+    font-size:30px;
+    margin-left:15px;
+}
