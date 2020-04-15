@@ -1,40 +1,150 @@
 <h1>Test Anime Series</h1>
 
-<div>
-    <form>
-        <legend>Choose a series</legend>
-        <select id="Series">
-            <option *ngFor="let s of Animeseries" 
-            [value]="s.name"> {{ s.name }}</option>
-            <option value="default">Default</option>
-        </select> 
-    </form>       
-</div>
+<form>
+    <div>
+        <h3><b>Select Series</b></h3>
+        <select [(ngModel)]="Seriesid" name="Seriesid">
+            <option value="967">Fist of the North Star</option>
+            <option value="30694">Dragon Ball Super</option>
+            <option value="1254">Saint Seiya</option>
 
-<table class="seriesTable">
+            <option value="14719">JoJo's Bizarre Adventure</option>
+            <option value="20899">JoJo's Bizarre Adventure: Stardust Crusaders</option>
+            <option value="31933">JoJo's Bizarre Adventure: Diamond is Unbreakable</option>
+            <option value="37991">JoJo's Bizarre Adventure: Golden Wind</option>
+
+            <option value="392">Yu Yu Hakusho</option>
+            <option value="45">Rurouni Kenshin</option>
+            <option value="481">Yu-Gi-Oh!</option>
+            <option value="21">One Piece</option>
+
+            <option value="11061">Hunter x Hunter</option>
+            <option value="154">Shaman King</option>
+            <option value="1735">Naruto: Shippuden</option>
+            <option value="269">Bleach</option>
+
+            <option value="1535">Death Note</option>
+            <option value="1604">Katekyo Hitman Reborn!</option>
+            <option value="10033">Toriko</option>
+            <option value="9513">Beelzebub</option>
+
+            <option value="24833">Assassination Classroom</option>
+            <option value="31964">My Hero Academia</option>
+            <option value="34572">Black Clover</option>
+            <option value="38000">Demon Slayer</option>
+
+            <option value="38691">Dr. Stone</option>
+            <option value="14513">Magi: The Labyrinth of Magic</option>
+            <option value="30831">KonoSuba: God's Blessing on This Wonderful World!</option>
+            <option value="31478">Bungo Stray Dogs</option>
+
+            <option value="24439">Blood Blockade Battlefront</option>
+            <option value="35120">Devilman: Crybaby</option>
+            <option value="37349">Goblin Slayer</option>
+            <option value="37430">That Time I Got Reincarnated as a Slime</option>
+
+            <option value="35790">The Rising of the Shield Hero</option>
+            <option value="37520">Dororo</option>
+            <option value="1292">Afro Samurai</option>
+            <option value="37521">Vinland Saga</option>
+
+            <option value="2001">Gurren Lagann</option>
+            <option value="5114">Fullmetal Alchemist: Brotherhood</option>
+            <option value="30276">One Punch Man</option>
+            <option value="32182">Mob Psycho 100</option>
+
+            <option value="6702">Fairy Tail</option>
+            <option value="23755">The Seven Deadly Sins</option>
+            <option value="4654">A Certain Magical Index</option>
+            <option value="3588">Soul Eater</option>
+
+            <option value="38671">Fire Force</option>
+            <option value="9941">Tiger & Bunny</option>
+            <option value="270">Hellsing</option>
+            <option value="31339">Drifters</option>
+
+            <option value="11757">Sword Art Online</option>
+            <option value="17265">Log Horizon</option>
+            <option value="16498">Attack on Titan</option>
+            <option value="18679">KILL la KILL</option>
+
+        </select>
+        <button (click)="getSeries()" class="btn btn-secondary">Get Series</button>
+    </div>
+
+    <div>
+        <ul>
+        <!-- <li><b>Id</b>: {{Seriesid}}</li> -->
+        <li><b>Title</b>: {{Seriesname}}</li>
+        <img src={{Seriesimage}} alt="Series Image">
+        <li><b>Description</b>: {{Seriesdescription}}</li>
+        </ul>
+    </div>
+
+</form>
+
+<form>
+    <h3>Add character name</h3>
+    <div>
+        <label class="label col-sm-3">character:</label>
+        <input type="text" name="Charname" [(ngModel)]="Charactername" class="form-control" placeholder="Character name" required>
+        <input type="text" name="Chargender" [(ngModel)]="Charactergender" class="form-control" placeholder="gender" required>
+        <input type="text" name="Charimage" [(ngModel)]="Characterimage" class="form-control" placeholder="charimage" required>
+        <input type="text" name="Charprofile" [(ngModel)]="Characterdescrip" class="form-control" placeholder="description" required>
+        <input type="text" name="Charrank" [(ngModel)]="Characterrank" class="form-control" placeholder="rank" required>
+        <input type="text" name="Charability" [(ngModel)]="Characterability" class="form-control" placeholder="ability" required>
+
+
+        <button (click)="sendCharacter()" class="btn btn-secondary">Get Series</button>
+    </div>
+</form>
+
+
+<form>
+    <h3>Give the character a skill</h3>
+    <div>
+        <input type="number" name="newPokeTrain" [(ngModel)]="Charactername" min="1" step="1" class="form-control" placeholder="Pokemon's Trainer's ID" required>
+        <input type="text" name="Charskill" [(ngModel)]="Characterskill" class="form-control" placeholder="skill" required>
+    </div>
+    
+</form>
+
+<!-- <table class="seriesTable">
     <thead>
         <tr>
             <th scope="col">Series Id</th>
             <th scope="col">Series Name</th>
-            <th scope="col">Series Image</th>
+            <th scope="col">Series Description</th>
+            <th scope="col">Characters</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let s of Animeseries">
-            <td>{{ s.id }}</td>
+            <td>{{ s.sId }}</td>
             <td>{{ s.name }}</td>
+            <td>{{ s.description }}</td>
+            <td>
+                <table *ngIf="s.characters">
+                    <tbody>
+                        <tr *ngFor="let c of s.characters">
+                            <td>{{c.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </td>
         </tr>
     </tbody>
-</table>
+</table> -->
                 
-<form>
-    <h3>Name the anime series</h3>
+<!-- <form>
+    <h3>add characters</h3>
     <div>
-        <label class="label col-sm-3">Series name:</label>
-        <input type="text" name="SeriesName" [(ngModel)]="Seriesname" class="form-control" placeholder="Series Name" required>
-        <button (click)="getSeries()" class="btn btn-secondary">Get Series</button>
+        <label class="label col-sm-3">character name:</label>
+        <input type="text" name="CharacterName" [(ngModel)]="animecharac" class="form-control" placeholder="Character Name" required>
+        <button (click)="sendcharacter()" class="btn btn-secondary">add character</button>
     </div>
-</form>
+</form> -->
 
 
 <!--

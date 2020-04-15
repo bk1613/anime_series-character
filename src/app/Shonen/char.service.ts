@@ -10,22 +10,18 @@ import { Skills } from '../models/skills';
 })
 export class CharService {
   configUrl = 'http://localhost:8080/project2';
-  seriesUrl = 'https://kitsu.io/api/edge/anime?filter[text]=';
+  seriesUrl = 'https://api.jikan.moe/v3/anime/';
   characterUrl = 'http://www.animecharactersdatabase.com/api_series_characters.php?character_id=';
 
   constructor(private http: HttpClient) { }
 
-  getCharacter(id: number): Observable<any>{
-    return this.http.get<Character>(this.characterUrl + id)
+  getCharacter(name: String): Observable<any>{
+    return this.http.get<Character>(this.configUrl + name)
   }
   
-  getSeries(name: String): Observable<any>{
-    return this.http.get<Series>(this.seriesUrl + name);
+  getSeries(id: number): Observable<any[]>{
+    return this.http.get<any[]>(this.seriesUrl + id);
   }
-
-  // getSeries(name: String): Observable<any>{
-  //   return this.http.get<Series>("http://www.animecharactersdatabase.com/api_series_characters.php?anime_id=" + id)
-  // }
 
   getSkill(id:number){
     return this.http.get<Skills>(this.configUrl + '/anime/characterskill');
@@ -44,11 +40,12 @@ export class CharService {
   }
 
   addCharacter(c:Character): Observable<Character[]> {
-    return this.http.post<Character[]>(this.configUrl + '/anime/char/insert', c);
+    console.log("respond");
+    return this.http.put<Character[]>(this.configUrl + '/anime/char/insert', c);
   }
 
   addSeries(s:Series): Observable<Series[]> {
-    return this.http.post<Series[]>(this.configUrl + '/anime', s);
+    return this.http.post<Series[]>(this.configUrl + '/anime/ser/insert', s);
   }
 
   addSkill(sk:Skills): Observable<Skills[]>{
