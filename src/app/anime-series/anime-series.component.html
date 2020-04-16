@@ -79,6 +79,48 @@
         <img src={{Seriesimage}} alt="Series Image">
         <li><b>Description</b>: {{Seriesdescription}}</li>
         </ul>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Special Ability</th>
+                    <th scope="col">skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ac of AnimeCharacters">
+                    <td>{{ac.CharId}}</td>
+                    <td>{{ac.name}}</td>
+                    <td>{{ac.gender}}</td>
+                    <td><img src={{ac.image}} alt="Series Image"></td>
+                    <td>{{ac.profile}}</td>
+                    <td>{{ac.rank}}</td>
+                    <td>{{ac.ability}}</td>
+                    <td>
+                        <table *ngIf="ac.skills">
+                            <!-- <thead>
+                                <tr>
+                                    <th>skills</th>
+                                </tr>
+                            </thead> -->
+                            <tbody>
+                                <tr *ngFor="let a of ac.skills">
+                                    <td>{{a.skillname}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
     </div>
 
 </form>

@@ -34,8 +34,8 @@ export class AnimeSeriesComponent implements OnInit {
   constructor(private cs: CharService) { }
 
   ngOnInit(): void {
-    //this.getSeries();
-     
+
+     //this.getCharacters();
   }
 
   ser = [14719, 45];
@@ -65,36 +65,46 @@ export class AnimeSeriesComponent implements OnInit {
         })
         // console.log(JSON.parse(this.details));
         //this.sendseries(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription);
+        this.getCharacters();
       }
     )
+  }
 
-  }
-  sendseries(id: number, name: String, image: String, syn: String){
-    console.log(id);
-    console.log(name);
-    console.log(image);
-    console.log(syn);
-    let notser: Boolean = true;
-    let s = new Series(id, name, image, syn, []);
-    this.cs.getAllSeries().subscribe(
-      (response: Series[]) => {
-        this.Animeseries = response;
-        this.Animeseries.forEach(function (value) {
-          if(value.sId !== id){
-            notser = true;
-          }
-          notser = false;
-        });
-        if(notser === true){
-          this.cs.addSeries(s).subscribe(
-            (response: Series[]) => {
-              this.Animeseries = response;
-            }
-          )
-        }
+  getCharacters(){
+    this.cs.getAllCharacters().subscribe(
+      (response:Character[])=> {
+        this.AnimeCharacters = response;
       }
     )
   }
+
+
+  // sendseries(id: number, name: String, image: String, syn: String){
+  //   console.log(id);
+  //   console.log(name);
+  //   console.log(image);
+  //   console.log(syn);
+  //   let notser: Boolean = true;
+  //   let s = new Series(id, name, image, syn, []);
+  //   this.cs.getAllSeries().subscribe(
+  //     (response: Series[]) => {
+  //       this.Animeseries = response;
+  //       this.Animeseries.forEach(function (value) {
+  //         if(value.sId !== id){
+  //           notser = true;
+  //         }
+  //         notser = false;
+  //       });
+  //       if(notser === true){
+  //         this.cs.addSeries(s).subscribe(
+  //           (response: Series[]) => {
+  //             this.Animeseries = response;
+  //           }
+  //         )
+  //       }
+  //     }
+  //   )
+  // }
 
   sendCharacter() : void{
     console.log(this.Seriesid);
