@@ -95,13 +95,13 @@
             </thead>
             <tbody>
                 <tr *ngFor="let ac of AnimeCharacters">
-                    <td>{{ac.CharId}}</td>
+                    <td>{{ac.charId}}</td>
                     <td>{{ac.name}}</td>
                     <td>{{ac.gender}}</td>
-                    <td><img src={{ac.image}} alt="Series Image"></td>
+                    <td><img src={{ac.image}} alt="Character Image" width="175" height="200"></td>
                     <td>{{ac.profile}}</td>
                     <td>{{ac.rank}}</td>
-                    <td>{{ac.ability}}</td>
+                    <td>{{ac.special}}</td>
                     <td>
                         <table *ngIf="ac.skills">
                             <!-- <thead>
@@ -126,18 +126,39 @@
 </form>
 
 <form>
-    <h3>Add character name</h3>
+    <h3><b>Add a New Character</b></h3>
     <div>
-        <label class="label col-sm-3">character:</label>
-        <input type="text" name="Charname" [(ngModel)]="Charactername" class="form-control" placeholder="Character name" required>
-        <input type="text" name="Chargender" [(ngModel)]="Charactergender" class="form-control" placeholder="gender" required>
-        <input type="text" name="Charimage" [(ngModel)]="Characterimage" class="form-control" placeholder="charimage" required>
-        <input type="text" name="Charprofile" [(ngModel)]="Characterdescrip" class="form-control" placeholder="description" required>
-        <input type="text" name="Charrank" [(ngModel)]="Characterrank" class="form-control" placeholder="rank" required>
-        <input type="text" name="Charability" [(ngModel)]="Characterability" class="form-control" placeholder="ability" required>
+        <label class="label col-sm-3"><b>Enter Character Fields</b></label>
+        <input type="text" name="Charname" [(ngModel)]="Charactername" class="form-control" placeholder="Enter Character's Name..." required>
+        <!-- <input type="text" name="Chargender" [(ngModel)]="Charactergender" class="form-control" placeholder="gender" required> -->
+
+        <select [(ngModel)]="Charactergender" name="Chargender" required>
+            <option value="" disabled selected>Select Character's Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <input type="text" name="Charimage" [(ngModel)]="Characterimage" class="form-control" placeholder="Enter Character's Image URL..." required>
+        <input type="text" name="Charprofile" [(ngModel)]="Characterdescrip" class="form-control" placeholder="Enter Character's Description..." required>
+        <!-- <input type="text" name="Charrank" [(ngModel)]="Characterrank" class="form-control" placeholder="rank" required> -->
+
+        <select [(ngModel)]="Characterrank" name="Charrank" required>
+            <option value="" disabled selected>Select Character's Rank</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <input type="text" name="Charability" [(ngModel)]="Characterability" class="form-control" placeholder="Enter Character's Ability..." required>
 
 
-        <button (click)="sendCharacter()" class="btn btn-secondary">Get Series</button>
+        <button (click)="sendCharacter()" class="btn btn-secondary">Add Character</button>
     </div>
 </form>
 
@@ -145,8 +166,11 @@
 <form>
     <h3>Give the character a skill</h3>
     <div>
-        <input type="number" name="newPokeTrain" [(ngModel)]="Charactername" min="1" step="1" class="form-control" placeholder="Pokemon's Trainer's ID" required>
+        <label class="label col-sm-3">Character's id:</label>
+        <input type="text" name="Characterid" [(ngModel)]="Charaterid" min="1" step="1" class="form-control" placeholder="Character's id" required>
+        <label class="label col-sm-3">skills:</label>
         <input type="text" name="Charskill" [(ngModel)]="Characterskill" class="form-control" placeholder="skill" required>
+        <button (click)="sendskill()" class="btn btn-secondary">Add Skill</button>
     </div>
     
 </form>

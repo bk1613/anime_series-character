@@ -15,8 +15,8 @@ export class CharService {
 
   constructor(private http: HttpClient) { }
 
-  getCharacter(name: String): Observable<any>{
-    return this.http.get<Character>(this.configUrl + '/anime/' + name)
+  getCharacter(id: number): Observable<any>{
+    return this.http.get<Character>(this.configUrl + '/anime/' + id)
   }
   
   getSeries(id: number): Observable<any[]>{
@@ -31,9 +31,9 @@ export class CharService {
     return this.http.get<Character[]>(this.configUrl + '/anime/animecharacter');
   }
 
-  // getAllSeries() {
-  //   return this.http.get<Series[]>(this.configUrl + '/anime/animeseries')
-  // }
+  getAllSeries() {
+    return this.http.get<Series[]>(this.configUrl + '/anime/animeseries')
+  }
 
   // getAllSkills() {
   //   return this.http.get<Skills[]>(this.configUrl + '/anime/characterskill')
@@ -44,12 +44,12 @@ export class CharService {
     return this.http.put<Character[]>(this.configUrl + '/anime/char/insert', c);
   }
 
-  // addSeries(s:Series): Observable<Series[]> {
-  //   return this.http.post<Series[]>(this.configUrl + '/anime/ser/insert', s);
-  // }
+  addSeries(s:Series): Observable<Series[]> {
+    return this.http.post<Series[]>(this.configUrl + '/anime/ser/insert', s);
+  }
 
   addSkill(sk:Skills): Observable<Skills[]>{
-    return this.http.post<Skills[]>(this.configUrl + '/anime/ski/insert', sk);
+    return this.http.put<Skills[]>(this.configUrl + '/anime/ski/insert', sk);
   }
 
 }

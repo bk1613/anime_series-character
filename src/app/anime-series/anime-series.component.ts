@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { CharService } from '../Shonen/char.service'
 import { Series } from '../models/series';
 import { Skills } from '../models/skills';
 import { Character } from '../models/character'
+import { map, switchMap } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-anime-series',
@@ -17,6 +19,7 @@ export class AnimeSeriesComponent implements OnInit {
   Seriesdescription: String;
   Seriesimage: String;
 
+  Charaterid: number;
   Charactername: String;
   Charactergender: String;
   Characterdescrip: String;
@@ -24,6 +27,8 @@ export class AnimeSeriesComponent implements OnInit {
   Characterrank: String;
   Characterability: String;
   Characterskill: String;
+
+  Animeskill: Skills[];
 
   AnimeImage: Blob;
   Animeseries: Series[];
@@ -48,7 +53,9 @@ export class AnimeSeriesComponent implements OnInit {
         this.details = JSON.stringify(this.Animeseries);
         JSON.parse(this.details, (key, value) => {
           if (typeof value === 'string') {
-            if(key === 'title_english'){
+            if(key === 'title_english' && !(value === null)){
+              this.Seriesname = value;
+            } else if(key === 'title'){
               this.Seriesname = value;
             }
             if(key === 'synopsis'){
@@ -64,56 +71,114 @@ export class AnimeSeriesComponent implements OnInit {
           return value;
         })
         // console.log(JSON.parse(this.details));
-        //this.sendseries(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription);
+        this.sendseries(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription);
         this.getCharacters();
       }
     )
   }
 
   getCharacters(){
-    this.cs.getAllCharacters().subscribe(
-      (response:Character[])=> {
-        this.AnimeCharacters = response;
+    this.cs.getAllSeries().subscribe(
+      (response: any[]) =>{
+        this.Animeseries = response;
+        for (let s of this.Animeseries){
+          if(s.sId == this.Seriesid){
+            console.log(s.characters);
+            this.AnimeCharacters = s.characters;
+            console.log(this.AnimeCharacters);
+            // this.AnimeCharacters.push(new Character(s.characters.))
+          }
+          
+        }
+      }
+    )
+    // this.cs.getAllCharacters().subscribe(
+    //   (response: any[])=> {
+    //     console.log(response);
+    //     console.log(this.Seriesid);
+      
+    //     this.AnimeCharacters = response;
+        
+        
+       
+    //   }
+    // )
+  }
+
+
+  sendseries(id: number, name: String, image: String, syn: String){
+    
+    
+    let s = new Series(id, name, image, syn, []);
+    
+    this.cs.getAllSeries().subscribe(
+      (response: Series[]) => {
+        console.log(response);
+        this.Animeseries = response;
+        let noser: Boolean = true;
+        for (let a of this.Animeseries){
+          
+          if(a.sId == id){
+            console.log(a.sId);
+            noser = false;
+            break;
+          }
+        }
+        console.log(noser);
+        console.log(response);
+        if(noser === true){
+          this.cs.addSeries(s).subscribe(
+            (response: Series[]) => {
+              this.Animeseries = response;
+            }
+          )
+        }
       }
     )
   }
 
-
-  // sendseries(id: number, name: String, image: String, syn: String){
-  //   console.log(id);
-  //   console.log(name);
-  //   console.log(image);
-  //   console.log(syn);
-  //   let notser: Boolean = true;
-  //   let s = new Series(id, name, image, syn, []);
-  //   this.cs.getAllSeries().subscribe(
-  //     (response: Series[]) => {
-  //       this.Animeseries = response;
-  //       this.Animeseries.forEach(function (value) {
-  //         if(value.sId !== id){
-  //           notser = true;
-  //         }
-  //         notser = false;
-  //       });
-  //       if(notser === true){
-  //         this.cs.addSeries(s).subscribe(
-  //           (response: Series[]) => {
-  //             this.Animeseries = response;
-  //           }
-  //         )
-  //       }
-  //     }
-  //   )
-  // }
+  sendskill() : void{
+    let s = new Series(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription, []);
+    // let c = new Character(this.Charaterid, this.Charactername, this.Seriesimage, this.Charactergender, [], this.Characterability, this.Characterdescrip, this.Characterrank, s);
+    this.cs.getAllCharacters().subscribe(
+      (response: Character[]) =>{
+        console.log(response);
+        this.AnimeCharacters = response;
+        
+        for(let a of this.AnimeCharacters){
+          console.log(a.charId);
+          console.log(this.Charaterid);
+          if(a.charId == this.Charaterid){
+            let c = a;
+            this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
+              (response: Skills[]) => {
+                this.Animeskill = response;
+                this.getCharacters(); //Test if table updates in real time **DELETE IF THROWS ERRORS
+              }
+            )
+          }
+        }
+      }
+    )
+      
+    
+    // this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
+    //     (response: Skills[]) => {
+    //             this.Animeskill = response;
+              
+    //     }
+    // )
+      
+  }
 
   sendCharacter() : void{
-    console.log(this.Seriesid);
-    console.log(this.Charactername);
-    console.log(this.Charactergender);
-    console.log(this.Characterimage);
-    console.log(this.Characterdescrip);
-    console.log(this.Characterrank);
-    console.log(this.Characterability);
+    // console.log(this.Seriesid);
+    // console.log(this.Charactername);
+    // console.log(this.Charactergender);
+    // console.log(this.Characterimage);
+    // console.log(this.Characterdescrip);
+    // console.log(this.Characterrank);
+    // console.log(this.Characterability);
     let s = new Series(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription, []);
     // let c = new Character(1, this.Charactername, this.Seriesimage, this.Charactergender, [], this.Characterability, this.Characterdescrip, this.Characterrank, s)
     // this.cs.getSeries(this.Seriesid).pipe(
@@ -121,14 +186,14 @@ export class AnimeSeriesComponent implements OnInit {
 
     let c  =new Character(0, this.Charactername, this.Characterimage, this.Charactergender, [], this.Characterability, this.Characterdescrip,
       this.Characterrank, s);
-    console.log("response");
+    console.log(c.series.sId);
     this.cs.addCharacter(c).subscribe(
-      (response: Character[]) => {
+      (response: any[]) =>{
         console.log(response);
         this.AnimeCharacters = response;
-      }
+        this.getCharacters();
+      } 
     )
-    
 
   }
 
