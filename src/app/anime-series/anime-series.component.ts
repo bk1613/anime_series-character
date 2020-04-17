@@ -92,17 +92,6 @@ export class AnimeSeriesComponent implements OnInit {
         }
       }
     )
-    // this.cs.getAllCharacters().subscribe(
-    //   (response: any[])=> {
-    //     console.log(response);
-    //     console.log(this.Seriesid);
-      
-    //     this.AnimeCharacters = response;
-        
-        
-       
-    //   }
-    // )
   }
 
 
@@ -130,6 +119,7 @@ export class AnimeSeriesComponent implements OnInit {
           this.cs.addSeries(s).subscribe(
             (response: Series[]) => {
               this.Animeseries = response;
+              this.getCharacters();
             }
           )
         }
