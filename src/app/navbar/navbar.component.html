@@ -1,0 +1,24 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">AnimeRank</a>
+      </div>
+      <ul class="nav navbar-nav" >
+        <!-- <ul class="sub_modules">
+          <li (click)="activateClass(subModule)" *ngFor="let subModule of subModules" [ngClass]="{'active': subModule.active}">
+                <a>{{ subModule.name }}</a>
+            </li>
+        </ul> -->
+        
+        <li class="active"><a href="#">Home</a></li>
+        <li ><a routerLink="/series">Series</a></li>
+        <li ><a routerLink="/character">Character</a></li>
+        
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        
+        <li><a href="#"> <div class="glyphicon glyphicon-log-in" id="status"> Login</div></a></li>
+      </ul>
+    </div>
+  </nav>

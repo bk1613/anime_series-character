@@ -1,0 +1,14 @@
+<form>
+    <h3>Give the Character a Skill</h3>
+    <div class="col-md col-form-label-lg">
+        <label ><b>Character id</b></label>
+        <input type="text" name="Characterid" [(ngModel)]="Charaterid" min="1" step="1" class="form-control" 
+        title="Character's ID shown from table above" placeholder="Enter Character's Id..." required>
+
+        <label ><b>Skill</b></label>
+        <input type="text" name="Charskill" [(ngModel)]="Characterskill" class="form-control" 
+        title="Any skill that the Character can use" placeholder="Enter new Skill..." required>
+        <button (click)="sendskill()" class="btn btn-secondary">Add Skill</button>
+    </div>
+    
+</form>

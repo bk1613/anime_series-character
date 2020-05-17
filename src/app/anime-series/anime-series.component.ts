@@ -4,6 +4,7 @@ import { Series } from '../models/series';
 import { Skills } from '../models/skills';
 import { Character } from '../models/character'
 import { map, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
 
 @Component({
@@ -36,16 +37,21 @@ export class AnimeSeriesComponent implements OnInit {
   details: string;
   title: string;
 
-  constructor(private cs: CharService) { }
+  constructor(private router: Router, private cs: CharService) { }
 
   ngOnInit(): void {
 
      //this.getCharacters();
   }
 
+  // goCharacterCompoent(): void{
+  //   this.cs.data = this.Seriesname;
+  //   this.router.navigate(['/character'])
+  // }
   ser = [14719, 45];
 
   getSeries(){
+    
     this.cs.getSeries(this.Seriesid).subscribe(
       (response: Series[]) => {
         console.log(response);
@@ -70,8 +76,9 @@ export class AnimeSeriesComponent implements OnInit {
           }
           return value;
         })
-        // console.log(JSON.parse(this.details));
+        console.log(JSON.parse(this.details));
         this.sendseries(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription);
+        console.log("ghjakkklkr");
         this.getCharacters();
       }
     )
@@ -102,6 +109,7 @@ export class AnimeSeriesComponent implements OnInit {
     
     this.cs.getAllSeries().subscribe(
       (response: Series[]) => {
+        console.log("gjhgjg");
         console.log(response);
         this.Animeseries = response;
         let noser: Boolean = true;
@@ -127,64 +135,73 @@ export class AnimeSeriesComponent implements OnInit {
     )
   }
 
-  sendskill() : void{
-    let s = new Series(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription, []);
-    // let c = new Character(this.Charaterid, this.Charactername, this.Seriesimage, this.Charactergender, [], this.Characterability, this.Characterdescrip, this.Characterrank, s);
-    this.cs.getAllCharacters().subscribe(
-      (response: Character[]) =>{
-        console.log(response);
-        this.AnimeCharacters = response;
+  // sendskill() : void{
+  //   let s = new Series(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription, []);
+  //   // let c = new Character(this.Charaterid, this.Charactername, this.Seriesimage, this.Charactergender, [], this.Characterability, this.Characterdescrip, this.Characterrank, s);
+  //   this.cs.getAllCharacters().subscribe(
+  //     (response: Character[]) =>{
+  //       console.log(response);
+  //       this.AnimeCharacters = response;
         
-        for(let a of this.AnimeCharacters){
-          console.log(a.charId);
-          console.log(this.Charaterid);
-          if(a.charId == this.Charaterid){
-            let c = a;
-            this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
-              (response: Skills[]) => {
-                this.Animeskill = response;
-                this.getCharacters(); //Test if table updates in real time **DELETE IF THROWS ERRORS
-              }
-            )
-          }
-        }
-      }
-    )
+  //       for(let a of this.AnimeCharacters){
+  //         console.log(a.charId);
+  //         console.log(this.Charaterid);
+  //         if(a.charId == this.Charaterid){
+  //           let c = a;
+  //           this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
+  //             (response: Skills[]) => {
+  //               this.Animeskill = response;
+  //               this.getCharacters(); //Test if table updates in real time **DELETE IF THROWS ERRORS
+  //             }
+  //           )
+  //         }
+  //       }
+  //     }
+  //   )
       
     
-    // this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
-    //     (response: Skills[]) => {
-    //             this.Animeskill = response;
+  //   // this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
+  //   //     (response: Skills[]) => {
+  //   //             this.Animeskill = response;
               
-    //     }
-    // )
+  //   //     }
+  //   // )
       
+  // }
+
+  // sendCharacter() : void{
+
+  //   let s = new Series(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription, []);
+    
+
+  //   let c  =new Character(0, this.Charactername, this.Characterimage, this.Charactergender, [], this.Characterability, this.Characterdescrip,
+  //     this.Characterrank, s);
+  //   console.log(c.series.sId);
+  //   this.cs.addCharacter(c).subscribe(
+  //     (response: any[]) =>{
+  //       console.log(response);
+  //       this.AnimeCharacters = response;
+  //       this.getCharacters();
+  //     } 
+  //   )
+
+  // }
+
+  changechar(){
+    // this.cs.seriesname = this.Seriesname;
+    // this.cs.seriesid = this.Seriesid;
+    // this.cs.seriesimage = this.Seriesimage;
+    // this.cs.seriesdescription = this.Seriesdescription;
+    
+    this.router.navigate(['update'])
   }
 
-  sendCharacter() : void{
-    // console.log(this.Seriesid);
-    // console.log(this.Charactername);
-    // console.log(this.Charactergender);
-    // console.log(this.Characterimage);
-    // console.log(this.Characterdescrip);
-    // console.log(this.Characterrank);
-    // console.log(this.Characterability);
-    let s = new Series(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription, []);
-    // let c = new Character(1, this.Charactername, this.Seriesimage, this.Charactergender, [], this.Characterability, this.Characterdescrip, this.Characterrank, s)
-    // this.cs.getSeries(this.Seriesid).pipe(
-    //)
-
-    let c  =new Character(0, this.Charactername, this.Characterimage, this.Charactergender, [], this.Characterability, this.Characterdescrip,
-      this.Characterrank, s);
-    console.log(c.series.sId);
-    this.cs.addCharacter(c).subscribe(
-      (response: any[]) =>{
-        console.log(response);
-        this.AnimeCharacters = response;
-        this.getCharacters();
-      } 
-    )
-
+  char(){
+    this.cs.seriesname = this.Seriesname;
+    this.cs.seriesid = this.Seriesid;
+    this.cs.seriesimage = this.Seriesimage;
+    this.cs.seriesdescription = this.Seriesdescription;
+    this.router.navigate(['character'])
   }
 
 }

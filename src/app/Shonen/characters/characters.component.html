@@ -1,27 +1,66 @@
-<h1>Site Name</h1>
+<form>
+    <h3><b>Add a Character in {{seriesname}}</b> </h3>
+    <div class="col-md col-form-label-lg">
+        <label ><b>* All fields are required</b></label>
+        <br>
+        <label ><b>Characer name </b></label>
+        <input type="text" name="Charname" [(ngModel)]="Charactername" class="form-control" placeholder="Enter Character's Name..." required>
+        
+        <label ><b>Gender</b></label>
+        <select [(ngModel)]="Charactergender" name="Chargender" title="Select Characer's Gender" required>
+            <option value="" disabled selected>Select Character's Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
 
-<div id = "bio">
-    <div id = "bioheader">
-        <span id = name>
-            Character Name
-        </span>
-        <span id = attribute>
-            Attribute
-        </span>
-        <span id = rank>
-            Rank
-        </span>
-        <span id = gender>
-            Gender
-        </span>
+        
+        <label ><b>Image</b></label>
+        <input type="text" name="Charimage" [(ngModel)]="Characterimage" class="form-control" placeholder="Enter Character's Image URL..." required>
+
+        <label ><b>Profile</b></label>
+        <input type="text" name="Charprofile" [(ngModel)]="Characterdescrip" class="form-control" placeholder="Enter Character's Description..." required>
+
+        
+        <label ><b>Rank</b></label>
+        <select [(ngModel)]="Characterrank" name="Charrank" title="Characters are ranked from 1-10
+        10: indicates God-Level strength
+        5: indicates Super-human strength
+        1: indicates average-human level strength" required>
+            <option value="" disabled selected>Select Character's Rank</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+
+        <label ><b>Special Ability</b></label>
+        <input type="text" name="Charability" [(ngModel)]="Characterability" class="form-control" 
+        title="Main Ability/Technique that Character is known for." placeholder="Enter Character's Ability...">
+
+        <button (click)="sendCharacter()" class="btn btn-secondary">Add Character</button>
     </div>
-    <div id = "biobody">
-        <p>Description</p>
-        <p>Skill Set</p>
-        <ul>
-            <li>Skill 1</li>
-            <li>Skill 2</li>
-            <li>Skill 3</li>
-        </ul>
+</form>
+
+
+<!-- <form>
+    <h3>Give the Character a Skill</h3>
+    <div class="col-md col-form-label-lg">
+        <label ><b>Character id</b></label>
+        <input type="text" name="Characterid" [(ngModel)]="Charaterid" min="1" step="1" class="form-control" 
+        title="Character's ID shown from table above" placeholder="Enter Character's Id..." required>
+
+        <label ><b>Skill</b></label>
+        <input type="text" name="Charskill" [(ngModel)]="Characterskill" class="form-control" 
+        title="Any skill that the Character can use" placeholder="Enter new Skill..." required>
+        <button (click)="sendskill()" class="btn btn-secondary">Add Skill</button>
     </div>
-</div>
+    
+</form> -->
+
+

@@ -1,0 +1,19 @@
+
+<div id="center">
+  <h1>Login</h1>
+  <div class="form-group">
+    <label for="exampleInputUser1">User</label>
+    <input type="text" name="username" [(ngModel)]="logusername" class="form-control" placeholder="Enter username..." required>
+  </div>
+      
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="text" name="password" [(ngModel)]="logpassword" class="form-control" placeholder="Enter password..." required>
+  </div>
+
+  <div *ngFor="let error">{{error}}</div>
+
+  <button (click)="login()" id = "but" class="btn btn-lg btn-outline-light">submit</button>
+</div>
+
+

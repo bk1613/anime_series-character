@@ -1,4 +1,4 @@
-<h1>Ranking Anime Character for Each Series</h1>
+<h1 id="main">Ranking Anime Character for Each Series</h1>
 
 <form>
     <div>
@@ -75,12 +75,20 @@
     </div>
 
     <div>
-        <ul>
-        <li title="AYAYA"><b>Title</b>: {{Seriesname}}</li>
-        <img src={{Seriesimage}} alt="Series Image">
-        <li title="AYAYA"><b>Description</b>: {{Seriesdescription}}</li>
-        </ul>
+        
+        <h4>{{Seriesname}}</h4>
+        <div class="row">
+            
+            <div><img src={{Seriesimage}} alt="Series Image" width="200" height="250"></div>
+            <div><b> Description</b>: <br>{{Seriesdescription}}</div>
+            
+        </div>
 
+        <div class="row">
+            <h3 id = "chartit"><b>Characters</b></h3>
+            <button (click)="char()" class="btn btn-secondary" title="Search for Series">Add a New Character</button>
+        </div>
+        
         <table class="table table-hover table-striped table-bordered">
             <thead>
                 <tr>
@@ -95,6 +103,7 @@
                     1: indicates average-human level strength">Rank</th>
                     <th scope="col" title="Main Ability/Technique that Character is known for.">Special Ability</th>
                     <th scope="col" title="All possible skills that Characters knows.">Skills</th>
+                    <th scope="col" title="Update the character">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,17 +111,13 @@
                     <td>{{ac.charId}}</td>
                     <td>{{ac.name}}</td>
                     <td>{{ac.gender}}</td>
-                    <td><img src={{ac.image}} alt="Character Image" width="175" height="200"></td>
+                    <td><img src={{ac.image}} alt="Character Image" width="50" height="75"></td>
                     <td>{{ac.profile}}</td>
                     <td>{{ac.rank}}</td>
                     <td>{{ac.special}}</td>
+                    
                     <td>
                         <table *ngIf="ac.skills">
-                            <!-- <thead>
-                                <tr>
-                                    <th>skills</th>
-                                </tr>
-                            </thead> -->
                             <tbody>
                                 <tr *ngFor="let a of ac.skills">
                                     <td>{{a.skillname}}</td>
@@ -120,16 +125,17 @@
                             </tbody>
                         </table>
                     </td>
+                    <td><button (click)="changechar()" class="btn btn-secondary" title="Search for Series">Edit</button></td>
                 </tr>
             </tbody>
         </table>
 
-
+        
     </div>
 
 </form>
 
-<form>
+<!-- <form>
     <h3><b>Add a New Character</b></h3>
     <div>
         <label class="label col-sm-3"><b>Enter Character Fields</b></label>
@@ -180,4 +186,4 @@
     </div>
     
 </form>
-
+ -->
