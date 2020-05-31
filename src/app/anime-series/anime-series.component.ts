@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__, Input } from '@angular/core';
 import { CharService } from '../Shonen/char.service'
 import { Series } from '../models/series';
 import { Skills } from '../models/skills';
@@ -11,10 +11,11 @@ import { ThrowStmt } from '@angular/compiler';
   selector: 'app-anime-series',
   templateUrl: './anime-series.component.html',
   styleUrls: ['./anime-series.component.css']
+
 })
 
 export class AnimeSeriesComponent implements OnInit {
-
+  @Input() id:number;
   Seriesid: number;
   Seriesname: String;
   Seriesdescription: String;
@@ -34,8 +35,12 @@ export class AnimeSeriesComponent implements OnInit {
   AnimeImage: Blob;
   Animeseries: Series[];
   AnimeCharacters: Character[];
+  specificChar:any;
   details: string;
   title: string;
+
+  charindex: number;
+  
 
   constructor(private router: Router, private cs: CharService) { }
 
@@ -44,10 +49,6 @@ export class AnimeSeriesComponent implements OnInit {
      //this.getCharacters();
   }
 
-  // goCharacterCompoent(): void{
-  //   this.cs.data = this.Seriesname;
-  //   this.router.navigate(['/character'])
-  // }
   ser = [14719, 45];
 
   getSeries(){
@@ -93,6 +94,10 @@ export class AnimeSeriesComponent implements OnInit {
             console.log(s.characters);
             this.AnimeCharacters = s.characters;
             console.log(this.AnimeCharacters);
+            // for(let ac of this.AnimeCharacters){
+            //   this.Charaterid = ac.charId;
+            // }
+            
             // this.AnimeCharacters.push(new Character(s.characters.))
           }
           
@@ -135,64 +140,25 @@ export class AnimeSeriesComponent implements OnInit {
     )
   }
 
-  // sendskill() : void{
-  //   let s = new Series(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription, []);
-  //   // let c = new Character(this.Charaterid, this.Charactername, this.Seriesimage, this.Charactergender, [], this.Characterability, this.Characterdescrip, this.Characterrank, s);
-  //   this.cs.getAllCharacters().subscribe(
-  //     (response: Character[]) =>{
-  //       console.log(response);
-  //       this.AnimeCharacters = response;
-        
-  //       for(let a of this.AnimeCharacters){
-  //         console.log(a.charId);
-  //         console.log(this.Charaterid);
-  //         if(a.charId == this.Charaterid){
-  //           let c = a;
-  //           this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
-  //             (response: Skills[]) => {
-  //               this.Animeskill = response;
-  //               this.getCharacters(); //Test if table updates in real time **DELETE IF THROWS ERRORS
-  //             }
-  //           )
-  //         }
-  //       }
-  //     }
-  //   )
-      
+  changechar(charid){
+   
+    this.cs.seriesid = this.Seriesid;
+    this.cs.seriesname = this.Seriesname;
+    this.cs.Charaterid = charid;
+    this.cs.Charactername = this.Charactername;
+    this.cs.Characterdescrip = this.Characterdescrip;
+    this.cs.Charactergender = this.Charactergender;
+    this.cs.Characterability = this.Characterability;
+    for(let ac of this.AnimeCharacters){
+      if(ac.charId == charid){
+        // console.log(ac);
+        this.specificChar = ac;
+      }
+    }
+    console.log(this.specificChar.name)
+    this.cs.AnimeCharacters = this.specificChar;
     
-  //   // this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
-  //   //     (response: Skills[]) => {
-  //   //             this.Animeskill = response;
-              
-  //   //     }
-  //   // )
-      
-  // }
-
-  // sendCharacter() : void{
-
-  //   let s = new Series(this.Seriesid, this.Seriesname, this.Seriesimage, this.Seriesdescription, []);
-    
-
-  //   let c  =new Character(0, this.Charactername, this.Characterimage, this.Charactergender, [], this.Characterability, this.Characterdescrip,
-  //     this.Characterrank, s);
-  //   console.log(c.series.sId);
-  //   this.cs.addCharacter(c).subscribe(
-  //     (response: any[]) =>{
-  //       console.log(response);
-  //       this.AnimeCharacters = response;
-  //       this.getCharacters();
-  //     } 
-  //   )
-
-  // }
-
-  changechar(){
-    // this.cs.seriesname = this.Seriesname;
-    // this.cs.seriesid = this.Seriesid;
-    // this.cs.seriesimage = this.Seriesimage;
-    // this.cs.seriesdescription = this.Seriesdescription;
-    
+    this.cs.Animeseries = this.Animeseries;
     this.router.navigate(['update'])
   }
 
@@ -202,6 +168,40 @@ export class AnimeSeriesComponent implements OnInit {
     this.cs.seriesimage = this.Seriesimage;
     this.cs.seriesdescription = this.Seriesdescription;
     this.router.navigate(['character'])
+  }
+
+  deletechar(id){
+    let c = confirm("Are you sure you want to delete")
+    if( c == true){
+      console.log("you deleted this row")
+      
+
+      for(let ac of this.AnimeCharacters){
+
+        
+        if(ac.charId == id){
+          console.log(ac);
+          console.log(ac.skills);
+          for(let sk of ac.skills){
+            this.cs.deleteskill(sk).subscribe(
+              (response: any[]) => {
+                this.Animeseries = response;
+                this.cs.deletechar(ac).subscribe(
+                  (response: any[]) => {
+                    // this.AnimeCharacters = response;
+                  }
+                )
+
+              }
+            )
+          }
+          
+        }
+      }
+
+      
+    }
+    this.router.navigate(['series'])
   }
 
 }

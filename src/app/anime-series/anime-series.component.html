@@ -1,6 +1,6 @@
 <h1 id="main">Ranking Anime Character for Each Series</h1>
 
-<form>
+<form name="Series-list">
     <div>
         <h3><b>Select Series</b></h3> 
 
@@ -107,7 +107,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let ac of AnimeCharacters">
+                <tr *ngFor="let ac of AnimeCharacters; let in = index">
                     <td>{{ac.charId}}</td>
                     <td>{{ac.name}}</td>
                     <td>{{ac.gender}}</td>
@@ -125,12 +125,23 @@
                             </tbody>
                         </table>
                     </td>
-                    <td><button (click)="changechar()" class="btn btn-secondary" title="Search for Series">Edit</button></td>
+                    <td>
+                        <form name="edit charcter">
+                            <!-- <div>{{AnimeCharacters[in].charId}}</div> -->
+                            <!-- <input type="button" (click)="changechar(ac.charId)" [(ngModel)]="ac.charId" name="edit"> -->
+                            <button (click)="deletechar(ac.charId)" class="glyphicon glyphicon-remove" id="deletebutton"></button>
+                        
+                            &nbsp; &nbsp;
+                            <button (click)="changechar(ac.charId)" class="glyphicon glyphicon-pencil" id="editbutton"></button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>
-
-        
+        <!-- <h3 id = "chartit"><b>Update the character</b></h3>
+        <input type="text" name="Characterid" [(ngModel)]="Charaterid" min="1" step="1" class="form-control" 
+        title="Character's ID shown from table above" placeholder="Enter Character's Id..." required>
+        <button (click)="changechar()" class="btn btn-secondary" title="Search for Series">Edit</button> -->
     </div>
 
 </form>

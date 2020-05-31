@@ -18,6 +18,17 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
+
+#deletebutton:hover:before{
+    content:"delete";
+}
+
+
+#editbutton:hover:before{
+   
+    content: "edit";
+}
+
 div {
     border-radius: 5px;
     background-color: #f2f2f2;
@@ -46,8 +57,14 @@ ul {
     text-align:center;
   }
 
-
+  th{
+    text-align: center;
+    }
 
   #chartit{
       padding-right: 80%;
   }
+
+  button{
+    background-color: rgb(182, 182, 182);
+}

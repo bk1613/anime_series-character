@@ -7,18 +7,17 @@
         <input type="text" name="Charname" [(ngModel)]="Charactername" class="form-control" placeholder="Enter Character's Name..." required>
         
         <label ><b>Gender</b></label>
-        <select [(ngModel)]="Charactergender" name="Chargender" title="Select Characer's Gender" required>
-            <option value="" disabled selected>Select Character's Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-
+        <br>
+        <input type="radio"  [(ngModel)]="Charactergender" id="male" name="Chargender" title="Select Characer's Gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio"  [(ngModel)]="Charactergender" id="femalemale" name="Chargender" title="Select Characer's Gender" value="female">
+        <label for="female">Female</label><br>
         
         <label ><b>Image</b></label>
         <input type="text" name="Charimage" [(ngModel)]="Characterimage" class="form-control" placeholder="Enter Character's Image URL..." required>
 
         <label ><b>Profile</b></label>
-        <input type="text" name="Charprofile" [(ngModel)]="Characterdescrip" class="form-control" placeholder="Enter Character's Description..." required>
+        <textarea name="Charprofile" [(ngModel)]="Characterdescrip" class="form-control" placeholder="Enter Character's Description..." required rows="4" cols="100%"></textarea>
 
         
         <label ><b>Rank</b></label>
@@ -43,7 +42,7 @@
         <input type="text" name="Charability" [(ngModel)]="Characterability" class="form-control" 
         title="Main Ability/Technique that Character is known for." placeholder="Enter Character's Ability...">
 
-        <button (click)="sendCharacter()" class="btn btn-secondary">Add Character</button>
+        <button (click)="sendCharacter()" class="btn btn-secondary">Save</button>
     </div>
 </form>
 

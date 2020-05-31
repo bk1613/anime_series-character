@@ -10,15 +10,26 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class CharService {
-  configUrl = 'http://localhost:8080/project2';
+  configUrl = 'http://localhost:8080/anime';
   seriesUrl = 'https://api.jikan.moe/v3/anime/';
-  // characterUrl = 'http://www.animecharactersdatabase.com/api_series_characters.php?character_id=';
 
   seriesid: any;
   seriesname: any;
   seriesdescription: any;
   seriesimage: any;
 
+  Charaterid: any;
+  Charactername: any;
+  Charactergender: any;
+  Characterdescrip: any;
+  Characterimage: any;
+  Characterrank: any;
+  Characterability: any;
+  Characterskill: any;
+
+  AnimeCharacters:any;
+  Animeseries:any;
+  charskill: Skills[];
   private messageSource = new BehaviorSubject('default message');
   currentMessage = this.messageSource.asObservable();
   
@@ -29,7 +40,7 @@ export class CharService {
   }
 
   getCharacter(id: number): Observable<any>{
-    return this.http.get<Character>(this.configUrl + '/anime/' + id)
+    return this.http.get<Character>(this.configUrl + '/character/' + id)
   }
   
   getSeries(id: number): Observable<any[]>{
@@ -37,15 +48,15 @@ export class CharService {
   }
 
   getallSkill(){
-    return this.http.get<Skills[]>(this.configUrl + '/anime/characterskill');
+    return this.http.get<Skills[]>(this.configUrl + '/skill/characterskill');
   }
 
   getAllCharacters() {
-    return this.http.get<Character[]>(this.configUrl + '/anime/animecharacter');
+    return this.http.get<Character[]>(this.configUrl + '/character/animecharacter');
   }
 
   getAllSeries() {
-    return this.http.get<Series[]>(this.configUrl + '/anime/animeseries')
+    return this.http.get<Series[]>(this.configUrl + '/series/animeseries')
   }
 
   getalluserss() {
@@ -54,19 +65,31 @@ export class CharService {
 
   addCharacter(c:Character): Observable<Character[]> {
     console.log("respond");
-    return this.http.put<Character[]>(this.configUrl + '/anime/char/insert', c);
+    return this.http.put<Character[]>(this.configUrl + '/character/char/insert', c);
   }
 
   addSeries(s:Series): Observable<Series[]> {
-    return this.http.post<Series[]>(this.configUrl + '/anime/ser/insert', s);
+    return this.http.post<Series[]>(this.configUrl + '/series/ser/insert', s);
   }
 
   addSkill(sk:Skills): Observable<Skills[]>{
-    return this.http.put<Skills[]>(this.configUrl + '/anime/ski/insert', sk);
+    return this.http.put<Skills[]>(this.configUrl + '/skill/ski/insert', sk);
   }
 
   adduser(us:User): Observable<User[]>{
     return this.http.put<User[]>(this.configUrl + '/user/sub/insert', us);
+  }
+
+  deletechar(c:Character): Observable<any>{
+    return this.http.put<Character>(this.configUrl + '/character/char/delete', c);
+  }
+
+  deleteskill(sk:Skills): Observable<any>{
+    return this.http.put<Skills>(this.configUrl + '/skill/ski/delete', sk);
+  }
+
+  updatechar(c:Character): Observable<any>{
+    return this.http.post<Character>(this.configUrl + '/character/char/update', c);
   }
 
 }
