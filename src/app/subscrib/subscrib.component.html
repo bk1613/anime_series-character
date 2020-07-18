@@ -1,13 +1,29 @@
 <div id="center">
   <h1>Subscribe</h1>
+  <div [innerHTML]="htmlContent"></div>
+  
   <div class="form-group">
     <label for="exampleInputUser1">User</label>
     <input type="text" name="username" [(ngModel)]="subusername" class="form-control" placeholder="Enter username..." required>
   </div>
-      
+
+  <div class="form-group">
+    <label for="exampleInputUser1">email</label>
+    <input type="email" name="email" [(ngModel)]="subemail" class="form-control" placeholder="Enter email..." required>
+  </div>
+
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="text" name="password" [(ngModel)]="subpassword" class="form-control" placeholder="Enter password..." required>
+    <input type="password" name="password" [(ngModel)]="subpassword" class="form-control" placeholder="Enter password..." required>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputrole1">Role</label>
+  <select [(ngModel)]="subrole" name="role" class="form-control" title="role" required>
+      <option value="" disabled selected>Select a role</option>
+      <option value="admin">admin</option>
+      <option value="subscribe">subscribe</option>
+  </select>
   </div>
 
   <button (click)="subscribtion()" class="btn btn-lg btn-outline-light">subscribe</button>

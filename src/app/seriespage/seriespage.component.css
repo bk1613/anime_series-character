@@ -1,0 +1,70 @@
+#seriesinfo{
+    border-style:solid;
+    border-width:5px;
+}
+#seriesinfo div{
+    display:inline-block;
+}
+#charmenu{
+    float:right;
+}
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+#deletebutton:hover:before{
+    content:"delete";
+}
+
+
+#editbutton:hover:before{
+   
+    content: "edit";
+}
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+ul {
+    list-style-image: url('ayaya.jpg')
+}
+
+.row{
+    display: flex;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  li{
+    margin: 10px 0;
+  }
+
+  #main{
+    text-align:center;
+  }
+
+  th{
+    text-align: center;
+    }
+
+  #chartit{
+      padding-right: 80%;
+  }
+
+  button{
+    background-color: rgb(182, 182, 182);
+}

@@ -1,0 +1,51 @@
+
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Description</th>
+            <th scope="col" title="Characters are ranked from 1-10
+            10: indicates God-Level strength
+            5: indicates Super-human strength
+            1: indicates average-human level strength">Rank</th>
+        </tr>
+    </thead>
+    <tbody>
+            <td>
+                <img src={{Characterimage}} alt="Character Image" width="200" height="250">
+            </td>
+            <td>
+                <div>Name: {{Charactername}} </div>
+
+                <div>Gender: {{Charactergender}}</div>
+
+                <div>Desription {{Characterdescrip}} </div>
+
+                <div>Special Ability: {{Characterability}}</div>
+            </td>
+            <td id="rank"> {{Characterrank}}</td>
+    </tbody>
+
+    
+</table>
+<b>how strong this charater is (1 is the lowest while 10 is the highest)</b>
+<div>
+    <button (click)="rank1()" class="btn btn-secondary">1</button>
+    <button (click)="rank2()" class="btn btn-secondary">2</button>
+    <button (click)="rank3()" class="btn btn-secondary">3</button>
+    <button (click)="rank4()" class="btn btn-secondary">4</button>
+    <button (click)="rank5()" class="btn btn-secondary">5</button>
+    <button (click)="rank6()" class="btn btn-secondary">6</button>
+    <button (click)="rank7()" class="btn btn-secondary">7</button>
+    <button (click)="rank8()" class="btn btn-secondary">8</button>
+    <button (click)="rank9()" class="btn btn-secondary">9</button>
+    <button (click)="rank10()" class="btn btn-secondary">10</button>
+
+    
+</div>
+<div>
+    <button (click)="gradeA()" class="btn btn-secondary">A</button>
+    <button (click)="gradeB()" class="btn btn-secondary">B</button>
+    <button (click)="gradeC()" class="btn btn-secondary">C</button>
+</div>
+<button (click)="markRank()" class="btn btn-secondary">Save</button>

@@ -86,7 +86,8 @@ export class CharactersComponent implements OnInit {
     console.log(this.seriesname);
     let s = new Series(this.serid, this.seriesname, this.serimage, this.serdesp, []);
     
-
+    // let c  =new Character(0, this.Charactername, this.Characterimage, this.Charactergender, [], this.Characterability, this.Characterdescrip,
+    //   this.Characterrank, [], s);
     let c  =new Character(0, this.Charactername, this.Characterimage, this.Charactergender, [], this.Characterability, this.Characterdescrip,
       this.Characterrank, s);
     console.log(c.series.sId);

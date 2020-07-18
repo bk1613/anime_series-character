@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Character } from '../models/character';
 import { Series } from '../models/series';
 import { Skills } from '../models/skills';
 import { User } from '../models/user';
-
+import { Achievements } from '../models/achievements';
+import { LocalStorageService, SessionStorageService, LocalStorage, SessionStorage } from 'angular-web-storage';
+import { NavbarComponent } from 'src/app/navbar/navbar.component';
 @Injectable({
   providedIn: 'root'
 })
 export class CharService {
   configUrl = 'http://localhost:8080/anime';
   seriesUrl = 'https://api.jikan.moe/v3/anime/';
+
+  private messageSource = new BehaviorSubject('default message');
+  currentMessage = this.messageSource.asObservable();
 
   seriesid: any;
   seriesname: any;
@@ -26,25 +32,38 @@ export class CharService {
   Characterrank: any;
   Characterability: any;
   Characterskill: any;
+  Character: any;
+  booleanlogin:any;
+  usename: any;
+
+  role:String;
 
   AnimeCharacters:any;
   Animeseries:any;
   charskill: Skills[];
-  private messageSource = new BehaviorSubject('default message');
-  currentMessage = this.messageSource.asObservable();
   
-  constructor(private http: HttpClient) { }
+  NV: NavbarComponent;
+  constructor(private http: HttpClient, public session: SessionStorageService) { 
 
-  changeMessage(message: string){
+    // sessionStorage.setItem("role", this.role.toString());
+  }
+
+  changeMessage(message: string) {
     this.messageSource.next(message)
+  }
+
+  roleupdate(){
+    this.NV.loggs();
+    this.session.get("role");
   }
 
   getCharacter(id: number): Observable<any>{
     return this.http.get<Character>(this.configUrl + '/character/' + id)
   }
   
-  getSeries(id: number): Observable<any[]>{
-    return this.http.get<any[]>(this.seriesUrl + id);
+  getSeries(id: number): Observable<any>{
+    // return this.http.get<any[]>(this.seriesUrl + id);
+    return this.http.get<Series>(this.configUrl + '/series/' + id)
   }
 
   getallSkill(){
@@ -63,6 +82,14 @@ export class CharService {
     return this.http.get<User[]>(this.configUrl + '/user/animeusers')
   }
 
+  getallachievements(){
+    return this.http.get<Achievements[]>(this.configUrl + '/achievements/characterachievement');
+  }
+
+  addAchieve(ac: Achievements): Observable<Achievements[]>{
+    return this.http.put<Achievements[]>(this.configUrl + '/achievements/achieve/insert', ac);
+  }
+
   addCharacter(c:Character): Observable<Character[]> {
     console.log("respond");
     return this.http.put<Character[]>(this.configUrl + '/character/char/insert', c);
@@ -77,7 +104,7 @@ export class CharService {
   }
 
   adduser(us:User): Observable<User[]>{
-    return this.http.put<User[]>(this.configUrl + '/user/sub/insert', us);
+    return this.http.post<User[]>(this.configUrl + '/user/sub/insert', us);
   }
 
   deletechar(c:Character): Observable<any>{
@@ -89,7 +116,11 @@ export class CharService {
   }
 
   updatechar(c:Character): Observable<any>{
-    return this.http.post<Character>(this.configUrl + '/character/char/update', c);
+    return this.http.put<Character>(this.configUrl + '/character/char/update', c);
+  }
+
+  updateacheve(ac: Achievements): Observable<Achievements[]>{
+    return this.http.put<Achievements[]>(this.configUrl + '/achievements/achieve/update', ac);
   }
 
 }

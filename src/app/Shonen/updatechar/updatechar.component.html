@@ -60,7 +60,10 @@
         title="update the Character can use" placeholder="update a character..." required>
         </label>
 
+        
         </div>
+        <label ><b>Rank</b></label>
+    <div>{{Characterrank}}</div>
         <button (click)="updatechar()" class="btn btn-secondary">Update</button>
         
     </div>
@@ -80,7 +83,7 @@
                  <td *ngFor="let r of a">
                    {{r.skillname}}
                     <form name="edit skill">
-                        <button (click)="deleteskill(a.skillId)" class="glyphicon glyphicon-remove" id="deletebutton"></button>
+                        <button (click)="deleteskill(r.skillId)" class="glyphicon glyphicon-remove" id="deletebutton"></button>
                     </form>
                  </td>
                

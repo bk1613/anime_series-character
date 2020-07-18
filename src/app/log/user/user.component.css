@@ -43,7 +43,7 @@ i{
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: "Overpass",sans-serif;
-    background-color: rgba(80, 74, 74, 0.74);
+    background-color: rgba(80, 74, 74, 0.795);
   }
 
 
@@ -75,27 +75,36 @@ i{
   font-family:"Overpass";
   font-size:23px;
 }
-#subbutton{
-  margin-top:10px;
-  background-color: rgb(124, 121, 119);
+
+a{
   color:white;
-  width:300px;
+  margin-top:10px;
+
   font-family:"Overpass";
-  font-weight:bold;
-  font-size:22px;
+
+  font-size:18px;
   border-radius:20px;
   letter-spacing:1px;
-  height:45px;
+ 
   display:inline-block;
+
+}
+ 
+a:hover{
+  color: rgb(211, 65, 65)
 }
 
-#subbutton:hover{
-  background-color:rgb(219, 157, 65);
-  color:#F26925;
-  border: 2px solid #F26925;
-  border-radius: 22px ;
+#sub{
+  color:white;
+  margin-top:10px;
+
   font-family:"Overpass";
-  font-size:23px;
+
+  font-size:18px;
+  border-radius:20px;
+  letter-spacing:1px;
+ 
+  
 }
 
 .center1{

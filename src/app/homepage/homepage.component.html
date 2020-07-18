@@ -1,0 +1,55 @@
+
+<div class="centered">
+
+    <h1>Welcome to Anime Ranking system</h1>
+    <div *ngIf="role == undefined">  <b> Sign in as User</b></div> 
+    <form class="form-inline">
+        <div id="search" class="col-md col-form-label-lg">
+        <input type="search"
+        [(ngModel)]="Aseries"
+        placeholder="Pick one"
+        aria-label="Number"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        size="50">
+       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySeries">
+        <mat-option *ngFor="let option of filteredSeries | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+        </mat-autocomplete>
+        <button (click)="gotoseries()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+    </div>
+
+    </form>
+    
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th colspan="5" scope="col" title="All possible skills that Characters knows.">Series</th>
+                  
+            </tr>
+        </thead>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <tbody>
+            
+             <tr  *ngFor="let col of rowseries | paginate: { itemsPerPage: 3, currentPage: p, totalItems: rowseries.length };">
+                
+                 <td *ngFor="let r of col">
+                    
+                    <div><a (click)=" gotoseriespage(r.sId)" class="btn btn-secondary">
+                        {{r.name}}
+                        
+                      </a></div>
+                    <img src={{r.image}} alt="Character Image" width="150" height="175">
+                    
+                 </td>
+               
+            </tr>
+                        
+        </tbody>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+    <div class="col-md col-form-label-lg">
+</div>

@@ -7,7 +7,7 @@ import { AnimeSeriesComponent } from 'src/app/anime-series/anime-series.componen
 import { Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
-
+import { Achievements } from 'src/app/models/achievements';
 
 @Component({
   selector: 'app-updatechar',
@@ -23,6 +23,7 @@ export class UpdatecharComponent implements OnInit {
   Characterrank: String;
   Characterability: String;
   Characterskill: String;
+  Characterachievements: Achievements[];
 
   Updateability: String;
   Updatedescrip: String;
@@ -133,31 +134,6 @@ export class UpdatecharComponent implements OnInit {
       }
 
     )
-    // this.cs.getAllCharacters().subscribe(
-    //   (response: Character[]) =>{
-    //     this.AnimeCharacters = response;
-    //     for(let a of this.AnimeCharacters){
-    //       if(a.charId == this.Charaterid){
-    //         let c = a;
-    //         console.log(c);
-    //         this.cs.addSkill(new Skills(1, this.Characterskill, c)).subscribe(
-            //   (response: Skills[]) => {
-            //     this.cs.getAllCharacters().subscribe(
-            //       (response: Character[]) =>{
-            //         for(let a of response){
-            //           if(a.charId == this.Charaterid){
-            //             console.log(a.skills);
-            //           }
-            //         }
-            //       }
-            //     )
-            //   }
-    //         );
-            
-    //       }
-    //     }
-    //   }
-    // )
     
   }
 
@@ -170,10 +146,10 @@ export class UpdatecharComponent implements OnInit {
         console.log(response);
         // response;
         for(let a of response){
-          
-          
+
           if(a.charId == this.Charaterid){
             this.cs.updatechar(new Character(a.charId, this.Charactername, a.image, this.Charactergender, [], this.Characterability, this.Characterdescrip, a.rank, s)).subscribe(
+            // this.cs.updatechar(new Character(a.charId, this.Charactername, a.image, this.Charactergender, [], this.Characterability, this.Characterdescrip, a.rank, this.Characterachievements, s)).subscribe(
 
             )
           }
@@ -188,6 +164,20 @@ export class UpdatecharComponent implements OnInit {
   }
 
   deleteskill(id): void{
-    
+    console.log(id);
+    let c = confirm("Are you sure you want to delete")
+    if( c == true){
+      console.log("you deleted this row")
+      for(let ac of this.Animeskill){
+        if(ac.skillId == id){
+          
+              this.cs.deleteskill(ac).subscribe(
+              (response: any[]) => {
+            }
+          )
+        }
+      }
+    }
+    this.router.navigate(['update'])
   }
 }

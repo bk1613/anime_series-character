@@ -1,12 +1,13 @@
-<h1 id="main">Ranking Anime Character for Each Series</h1>
-
+<h1 id="main">Rank an Anime Character from this Series </h1>
 <form name="Series-list">
-    <div>
-        <h3><b>Select Series</b></h3> 
+    <!-- <div>
+        <h3><b>Select Series</b></h3>  -->
 
-        <select [(ngModel)]="Seriesid" name="Seriesid" title="Select a Series">
+        <!-- <select [(ngModel)]="Seriesid" name="Seriesid" title="Select a Series">
             <option value="" disabled selected>Select an Anime Series</option>
-            <option value="967">Fist of the North Star</option>
+            <option  *ngFor="let series of Animeseries" value="{{series.sId}}">{{series.name}}</option> -->
+            <!-- <option value="30544">Fist of the North Star</option> -->
+            <!-- <option value="967">Fist of the North Star</option>
             <option value="30694">Dragon Ball Super</option>
             <option value="1254">Saint Seiya</option>
 
@@ -70,12 +71,44 @@
             <option value="16498">Attack on Titan</option>
             <option value="18679">KILL la KILL</option>
 
-        </select>
+            <option value="36903">Kengan Ashura</option>
+            <option value="1575">Code Geass</option>
+            <option value="34096">Gintama</option>
+            <option value="1">Cowboy Bebop</option>
+
+            <option value="34561">Re:Creators</option>
+            <option value="37779">The Promised Neverland</option>
+            <option value="205">Samurai Champloo</option>
+            <option value="5355">Sengoku Basara</option>
+
+            <option value="30296">Chivalry of a Failed Knight</option>
+            <option value="68">Black Cat</option>
+            <option value="4898">Black Butler</option>
+            <option value="28121">Is It Wrong to Try to Pick Up Girls in a Dungeon?</option>
+
+            <option value="9919">Blue Exorcist</option> -->
+        <!-- </select>
         <button (click)="getSeries()" class="btn btn-secondary" title="Search for Series">Get Series</button>
+    </div> -->
+    <div class="col-md col-form-label-lg">
+        <input type="search"
+        [(ngModel)]="Seriesname"
+        placeholder="Pick one"
+        aria-label="Number"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        size="50">
+       <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    <button (click)="getSeries()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
     </div>
 
     <div>
-        
         <h4>{{Seriesname}}</h4>
         <div class="row">
             
@@ -86,7 +119,10 @@
 
         <div class="row">
             <h3 id = "chartit"><b>Characters</b></h3>
-            <button (click)="char()" class="btn btn-secondary" title="Search for Series">Add a New Character</button>
+            <div *ngIf="role == 'admin'">
+                <button (click)="char()" class="btn btn-secondary" title="Search for Series">Add a New Character</button>
+            </div>
+           
         </div>
         
         <table class="table table-hover table-striped table-bordered">
@@ -126,14 +162,25 @@
                         </table>
                     </td>
                     <td>
-                        <form name="edit charcter">
-                            <!-- <div>{{AnimeCharacters[in].charId}}</div> -->
-                            <!-- <input type="button" (click)="changechar(ac.charId)" [(ngModel)]="ac.charId" name="edit"> -->
-                            <button (click)="deletechar(ac.charId)" class="glyphicon glyphicon-remove" id="deletebutton"></button>
-                        
-                            &nbsp; &nbsp;
-                            <button (click)="changechar(ac.charId)" class="glyphicon glyphicon-pencil" id="editbutton"></button>
-                        </form>
+                        <div *ngIf="user != undefined && role == 'admin'; else subsribe">
+                            <form name="edit charcter">
+                                <!-- <div>{{AnimeCharacters[in].charId}}</div> -->
+                                <!-- <input type="button" (click)="changechar(ac.charId)" [(ngModel)]="ac.charId" name="edit"> -->
+                                <button (click)="deletechar(ac.charId)" class="glyphicon glyphicon-remove" id="deletebutton"></button>
+                            
+                                &nbsp; &nbsp;
+                                <button (click)="changechar(ac.charId)" class="glyphicon glyphicon-pencil" id="editbutton"></button>
+                            </form>
+                        </div>
+                        <ng-template #subsribe>
+                            <form name="edit charcter">
+                                <!-- <div>{{AnimeCharacters[in].charId}}</div> -->
+                                <!-- <input type="button" (click)="changechar(ac.charId)" [(ngModel)]="ac.charId" name="edit"> -->
+                                <button (click)="rankchar(ac.charId)" id="rank">Rank</button>
+                            
+                               
+                            </form>
+                        </ng-template>
                     </td>
                 </tr>
             </tbody>
@@ -145,56 +192,3 @@
     </div>
 
 </form>
-
-<!-- <form>
-    <h3><b>Add a New Character</b></h3>
-    <div>
-        <label class="label col-sm-3"><b>Enter Character Fields</b></label>
-        <input type="text" name="Charname" [(ngModel)]="Charactername" class="form-control" placeholder="Enter Character's Name..." required>
-
-        <select [(ngModel)]="Charactergender" name="Chargender" title="Select Characer's Gender" required>
-            <option value="" disabled selected>Select Character's Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-
-        <input type="text" name="Charimage" [(ngModel)]="Characterimage" class="form-control" placeholder="Enter Character's Image URL..." required>
-
-        <input type="text" name="Charprofile" [(ngModel)]="Characterdescrip" class="form-control" placeholder="Enter Character's Description..." required>
-
-        <select [(ngModel)]="Characterrank" name="Charrank" title="Characters are ranked from 1-10
-        10: indicates God-Level strength
-        5: indicates Super-human strength
-        1: indicates average-human level strength" required>
-            <option value="" disabled selected>Select Character's Rank</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        <input type="text" name="Charability" [(ngModel)]="Characterability" class="form-control" 
-        title="Main Ability/Technique that Character is known for." placeholder="Enter Character's Ability...">
-
-        <button (click)="sendCharacter()" class="btn btn-secondary">Add Character</button>
-    </div>
-</form>
-
-
-<form>
-    <h3>Give the Character a Skill</h3>
-    <div>
-        <input type="text" name="Characterid" [(ngModel)]="Charaterid" min="1" step="1" class="form-control" 
-        title="Character's ID shown from table above" placeholder="Enter Character's Id..." required>
-        <input type="text" name="Charskill" [(ngModel)]="Characterskill" class="form-control" 
-        title="Any skill that the Character can use" placeholder="Enter new Skill..." required>
-        <button (click)="sendskill()" class="btn btn-secondary">Add Skill</button>
-    </div>
-    
-</form>
- -->

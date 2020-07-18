@@ -1,0 +1,105 @@
+<h1 id="main">Rank an Anime Character from this Series </h1>
+<form name="Series-list">
+
+
+    <div class="col-md col-form-label-lg">
+        <input type="search"
+        [(ngModel)]="series"
+        placeholder="Pick one"
+        aria-label="Number"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        size="50">
+       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySeries">
+        <mat-option *ngFor="let option of filteredSeries | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+        </mat-autocomplete>
+        <button (click)="getSeries()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+    </div>
+
+    <div>
+        <h4>{{Seriesname}}</h4>
+        <div class="row">
+            
+            <div><img src={{Seriesimage}} alt="Series Image" width="200" height="250"></div>
+            <div><b> Description</b>: <br>{{Seriesdescription}}</div>
+            
+        </div>
+
+        <div class="row">
+            <h3 id = "chartit"><b>Characters</b></h3>
+            <div *ngIf="role == 'admin'">
+                <button (click)="char()" class="btn btn-secondary" title="Search for Series">Add a New Character</button>
+            </div>
+           
+        </div>
+        
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col" title="Characters are ranked from 1-10
+                    10: indicates God-Level strength
+                    5: indicates Super-human strength
+                    1: indicates average-human level strength">Rank</th>
+                    <th scope="col" title="Main Ability/Technique that Character is known for.">Special Ability</th>
+                    <th scope="col" title="All possible skills that Characters knows.">Skills</th>
+                    <th scope="col" title="Update the character">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ac of AnimeCharacters; let in = index">
+                    <td>{{ac.charId}}</td>
+                    <td>{{ac.name}}</td>
+                    <td>{{ac.gender}}</td>
+                    <td><img src={{ac.image}} alt="Character Image" width="50" height="75"></td>
+                    <td>{{ac.profile}}</td>
+                    <td>{{ac.rank}}</td>
+                    <td>{{ac.special}}</td>
+                    
+                    <td>
+                        <table *ngIf="ac.skills">
+                            <tbody>
+                                <tr *ngFor="let a of ac.skills">
+                                    <td>{{a.skillname}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <div *ngIf="role == 'admin'; else subsribe">
+                            <form name="edit charcter">
+                                <!-- <div>{{AnimeCharacters[in].charId}}</div> -->
+                                <!-- <input type="button" (click)="changechar(ac.charId)" [(ngModel)]="ac.charId" name="edit"> -->
+                                <button (click)="deletechar(ac.charId)" class="glyphicon glyphicon-remove" id="deletebutton"></button>
+                            
+                                &nbsp; &nbsp;
+                                <button (click)="changechar(ac.charId)" class="glyphicon glyphicon-pencil" id="editbutton"></button>
+                            </form>
+                        </div>
+                        <ng-template #subsribe>
+                            <form name="edit charcter">
+                                <!-- <div>{{AnimeCharacters[in].charId}}</div> -->
+                                <!-- <input type="button" (click)="changechar(ac.charId)" [(ngModel)]="ac.charId" name="edit"> -->
+                                <button (click)="rankchar(ac.charId)" id="rank">Rank</button>
+                            
+                               
+                            </form>
+                        </ng-template>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
+
+
+</form>
