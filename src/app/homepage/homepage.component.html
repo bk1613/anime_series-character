@@ -38,12 +38,12 @@
                 
                  <td *ngFor="let r of col">
                     
+                    <img src={{r.image}} alt="Character Image" width="150" height="175">
+                    
                     <div><a (click)=" gotoseriespage(r.sId)" class="btn btn-secondary">
                         {{r.name}}
                         
-                      </a></div>
-                    <img src={{r.image}} alt="Character Image" width="150" height="175">
-                    
+                    </a></div>
                  </td>
                
             </tr>

@@ -1,51 +1,99 @@
-
+<div id=rankpage>
 <table class="table table-hover table-striped table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Description</th>
-            <th scope="col" title="Characters are ranked from 1-10
-            10: indicates God-Level strength
-            5: indicates Super-human strength
-            1: indicates average-human level strength">Rank</th>
-        </tr>
-    </thead>
+    
     <tbody>
             <td>
                 <img src={{Characterimage}} alt="Character Image" width="200" height="250">
             </td>
             <td>
-                <div>Name: {{Charactername}} </div>
+                <div><label>Name:</label> {{Charactername}} </div>
 
-                <div>Gender: {{Charactergender}}</div>
+                <div><label>Gender:</label> {{Charactergender}}</div>
 
-                <div>Desription {{Characterdescrip}} </div>
+                <div><label>Desription:</label> {{Characterdescrip}} </div>
 
-                <div>Special Ability: {{Characterability}}</div>
+                <div><label>Ability:</label> {{Characterability}}</div>
+
+                <div><label>Rank:</label> {{Characterrank}}</div>
             </td>
-            <td id="rank"> {{Characterrank}}</td>
+           <!-- <td></td> -->
     </tbody>
 
     
 </table>
-<b>how strong this charater is (1 is the lowest while 10 is the highest)</b>
-<div>
-    <button (click)="rank1()" class="btn btn-secondary">1</button>
-    <button (click)="rank2()" class="btn btn-secondary">2</button>
-    <button (click)="rank3()" class="btn btn-secondary">3</button>
-    <button (click)="rank4()" class="btn btn-secondary">4</button>
-    <button (click)="rank5()" class="btn btn-secondary">5</button>
-    <button (click)="rank6()" class="btn btn-secondary">6</button>
-    <button (click)="rank7()" class="btn btn-secondary">7</button>
-    <button (click)="rank8()" class="btn btn-secondary">8</button>
-    <button (click)="rank9()" class="btn btn-secondary">9</button>
-    <button (click)="rank10()" class="btn btn-secondary">10</button>
 
+<b>How strong is this charater?  (1 is the lowest while 10 is the highest)&nbsp;&nbsp;</b>
+<button mat-button (click)="rankinfo()" class="btn btn-link" id="tooltip">?<span class="tooltiptext">More Info</span></button>
+</div>
+
+<div>
+
+    <label>Level: </label>
+    
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank1()" name="options" id="option1" autocomplete="off"> 1
+    </label>&nbsp;&nbsp;
+
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank2()" name="options" id="option2" autocomplete="off"> 2
+    </label>&nbsp;&nbsp;
+  
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank3()" name="options" id="option3" autocomplete="off"> 3
+    </label>&nbsp;&nbsp;
+
+
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank4()" name="options" id="option4" autocomplete="off"> 4
+    </label>&nbsp;&nbsp;
+
+   
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank5()" name="options" id="option5" autocomplete="off"> 5
+    </label>&nbsp;&nbsp;
+
+
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank6()" name="options" id="option6" autocomplete="off"> 6
+    </label>&nbsp;&nbsp;
+
+
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank7()" name="options" id="option7" autocomplete="off"> 7
+    </label>&nbsp;&nbsp;
+
+
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank8()" name="options" id="option8" autocomplete="off"> 8
+    </label>&nbsp;&nbsp;
+   
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="rank9()" name="options" id="option9" autocomplete="off"> 9
+    </label>&nbsp;&nbsp;
+   
+    <label  class="btn btn-secondary">
+        <input type="radio" (click)="rank10()" name="options" id="option10" autocomplete="off"> 10
+    </label>&nbsp;&nbsp;
+</div>
+
+<div>
+    <label>Grade: </label>
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="gradeA()" name="options" id="optionA" autocomplete="off"> A
+    </label>
+    
+
+
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="gradeB()" name="options" id="optionB" autocomplete="off"> B
+    </label>
+   
+
+    <label class="btn btn-secondary">
+        <input type="radio" (click)="gradeC()" name="options" id="optionC" autocomplete="off"> C
+    </label>
     
 </div>
 <div>
-    <button (click)="gradeA()" class="btn btn-secondary">A</button>
-    <button (click)="gradeB()" class="btn btn-secondary">B</button>
-    <button (click)="gradeC()" class="btn btn-secondary">C</button>
+<button (click)="markRank()" class="btn btn-dark" id="save">Save</button>
 </div>
-<button (click)="markRank()" class="btn btn-secondary">Save</button>

@@ -65,6 +65,40 @@ ul {
       padding-right: 80%;
   }
 
-  button{
+  /* button{
     background-color: rgb(182, 182, 182);
-}
+} */
+
+#tooltip{
+    position: relative;
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 10px;
+  }
+  
+  #tooltip .tooltiptext{
+    visibility: hidden;
+    background-color: rgb(175, 170, 170);
+    color: rgb(14, 14, 14);
+    text-align: center;
+    border-radius: 6px;
+    padding: 1px 0;
+  
+    position: absolute;
+    z-index: 1;
+    top: -15px;
+    left: 30px;
+  }
+  
+  #tooltip:hover .tooltiptext{
+    visibility: visible;
+  }
+
+  #save{
+    background-color: rgb(182, 182, 182);
+  }
+
+  #rankpage{
+    background-color: rgb(255, 255, 255);
+    margin: 0px;
+  }

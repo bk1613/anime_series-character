@@ -21,6 +21,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
 import { RankingpageComponent } from './rankingpage/rankingpage.component';
 import {BreadcrumbModule} from 'angular-crumbs';
 import { SeriespageComponent } from './seriespage/seriespage.component';
@@ -53,7 +54,8 @@ import { SeriespageComponent } from './seriespage/seriespage.component';
     MatAutocompleteModule,
     MatInputModule,
     ReactiveFormsModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    MatDialogModule
     // MatInputModule
   ],
   providers: [AnimeSeriesComponent, CharactersComponent],
